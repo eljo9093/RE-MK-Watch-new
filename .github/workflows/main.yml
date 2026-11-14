@@ -1,4 +1,4 @@
-name: Build REMK Pixel Watch 4 APK v27.4 Pro
+name: Build REMK Pixel Watch 4 APK v27.3 Pro
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-watch-apk:
-    name: Build Pixel Watch 4 APK (:wear only v27.4 Pro)
+    name: Build Pixel Watch 4 APK (:wear only v27.3 Pro)
     runs-on: ubuntu-latest
 
     steps:
@@ -37,10 +37,10 @@ jobs:
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null 2>&1 || true
           gradle :wear:assembleDebug --no-daemon
           mkdir -p "$GITHUB_WORKSPACE/watch_apk_out"
-          cp wear/build/outputs/apk/debug/wear-debug.apk "$GITHUB_WORKSPACE/watch_apk_out/REMK-Pixel-Watch-4-Standalone-v27-4-Pro.apk"
+          cp wear/build/outputs/apk/debug/wear-debug.apk "$GITHUB_WORKSPACE/watch_apk_out/REMK-Pixel-Watch-4-Standalone-v27-3-Pro.apk"
 
       - name: Upload Pixel Watch 4 APK
         uses: actions/upload-artifact@v4
         with:
-          name: REMK-Pixel-Watch-4-Standalone-APK-v27-4-Pro
-          path: watch_apk_out/REMK-Pixel-Watch-4-Standalone-v27-4-Pro.apk
+          name: REMK-Pixel-Watch-4-Standalone-APK-v27-3-Pro
+          path: watch_apk_out/REMK-Pixel-Watch-4-Standalone-v27-3-Pro.apk
