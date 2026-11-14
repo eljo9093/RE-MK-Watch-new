@@ -1,0 +1,51 @@
+name: Build REMK Pixel Watch 4 APK v28.0 Pro
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-watch-apk:
+    name: Build Pixel Watch 4 APK (:wear only v28.0 Pro)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Gradle 8.5
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.5'
+
+      - name: Prepare and Compile Watch APK (:wear)
+        shell: bash
+        run: |
+          WEAR_FILE=$(find . -name "build.gradle.kts" | grep "/wear/" | head -n 1)
+          if [ -n "$WEAR_FILE" ]; then
+            cd "$(dirname "$(dirname "$WEAR_FILE")")"
+          fi
+          mkdir -p wear/src/main/java/eu/remk/coaching/wear
+          if [ -d "wear_kt_backup" ]; then
+            cp -f wear_kt_backup/*.kt wear/src/main/java/eu/remk/coaching/wear/ || true
+          fi
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null 2>&1 || true
+          gradle :wear:assembleDebug --no-daemon
+          test -f wear/build/tmp/kotlin-classes/debug/eu/remk/coaching/wear/WearMainActivity.class
+          mkdir -p "$GITHUB_WORKSPACE/watch_apk_out"
+          cp wear/build/outputs/apk/debug/wear-debug.apk "$GITHUB_WORKSPACE/watch_apk_out/REMK-Pixel-Watch-4-Standalone-v28-0-Pro.apk"
+
+      - name: Upload Pixel Watch 4 APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: REMK-Pixel-Watch-4-Standalone-APK-v28-0-Pro
+          path: watch_apk_out/REMK-Pixel-Watch-4-Standalone-v28-0-Pro.apk
