@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WatchFace width="450" height="450">
+    <Scene backgroundColor="#ff05070b">
+        <!-- RE:MK Tactical Outer Bezel Ring -->
+        <PartDraw x="16" y="16" width="418" height="418">
+            <Variant mode="AMBIENT" target="alpha" value="90" />
+            <Arc centerX="209" centerY="209" width="406" height="406" startAngle="0" endAngle="360">
+                <Stroke color="#ff1e293b" thickness="6" />
+            </Arc>
+            <Arc centerX="209" centerY="209" width="406" height="406" startAngle="-140" endAngle="140">
+                <Stroke color="#ffff5e00" thickness="6" cap="ROUND" />
+            </Arc>
+        </PartDraw>
+
+        <!-- RE:MK Header Branding -->
+        <PartText x="75" y="68" width="300" height="36">
+            <Variant mode="AMBIENT" target="alpha" value="140" />
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="22" weight="BOLD" color="#ffff5e00">
+                    <Template>RE:MK PRO • %s%%</Template>
+                    <Parameter expression="[BATTERY_PERCENT]" />
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- Large Digital Sport Clock (HH:mm) -->
+        <DigitalClock x="45" y="122" width="360" height="128">
+            <TimeText x="0" y="0" width="360" height="128" align="CENTER" format="HH:mm">
+                <Variant mode="AMBIENT" target="color" value="#ffe2e8f0" />
+                <Font family="SYNC_TO_DEVICE" size="104" weight="BOLD" color="#ffffffff" />
+            </TimeText>
+        </DigitalClock>
+
+        <!-- Date & Day of Week -->
+        <PartText x="65" y="254" width="320" height="38">
+            <Variant mode="AMBIENT" target="alpha" value="150" />
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#ff38bdf8">
+                    <Template>%s.%s.</Template>
+                    <Parameter expression="[DAY_Z]" />
+                    <Parameter expression="[MONTH_Z]" />
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- Live Heart Rate & Steps Bar -->
+        <PartText x="55" y="304" width="340" height="44">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#ff10b981">
+                    <Template>❤️ %s BPM  •  👟 %s</Template>
+                    <Parameter expression="[HEART_RATE]" />
+                    <Parameter expression="[STEP_COUNT]" />
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- Bottom Tagline -->
+        <PartText x="85" y="356" width="280" height="32">
+            <Variant mode="AMBIENT" target="alpha" value="110" />
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="18" weight="BOLD" color="#ff94a3b8">
+                    ATHLETIC PERFORMANCE
+                </Font>
+            </Text>
+        </PartText>
+    </Scene>
+</WatchFace>

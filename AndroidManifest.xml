@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:icon="@drawable/ic_launcher"
+        android:roundIcon="@drawable/ic_launcher"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:hardwareAccelerated="true"
+        android:theme="@style/RemkWatchTheme">
+
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+
+        <activity
+            android:name=".WearMainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:stateNotNeeded="true"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:theme="@style/RemkWatchTheme"
+            android:configChanges="orientation|screenSize|keyboardHidden|uiMode">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- INSTANT-ACTION MICRO-ACTIVITIES FÜR 100% REAKTIONSFÄHIGE KACHEL-BUTTONS -->
+        <activity android:name=".TileKgMinusActivity" android:exported="true" android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true" android:noHistory="true" />
+        <activity android:name=".TileKgPlusActivity" android:exported="true" android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true" android:noHistory="true" />
+        <activity android:name=".TileLogSetActivity" android:exported="true" android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true" android:noHistory="true" />
+        <activity android:name=".TileRest60Activity" android:exported="true" android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true" android:noHistory="true" />
+        <activity android:name=".TileRest90Activity" android:exported="true" android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true" android:noHistory="true" />
+        <activity android:name=".TileRest120Activity" android:exported="true" android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true" android:noHistory="true" />
+        <activity android:name=".TileUndoSetActivity" android:exported="true" android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true" android:noHistory="true" />
+        <activity android:name=".TileWater250Activity" android:exported="true" android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true" android:noHistory="true" />
+        <activity android:name=".TileWater500Activity" android:exported="true" android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true" android:noHistory="true" />
+        <activity android:name=".TileMealCheckActivity" android:exported="true" android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true" android:noHistory="true" />
+        <activity android:name=".TileCloudSyncActivity" android:exported="true" android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true" android:noHistory="true" />
+
+        <!-- KACHEL 1: RE:MK KRAFT -->
+        <service
+            android:name=".RemkTileService"
+            android:exported="true"
+            android:label="RE:MK 1. Kraft"
+            android:description="@string/tile_description"
+            android:icon="@drawable/ic_tile_kraft"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+                <action android:name="androidx.wear.tiles.action.BIND_UPDATE_REQUESTER" />
+            </intent-filter>
+        </service>
+
+        <!-- KACHEL 2: RE:MK TIMER -->
+        <service
+            android:name=".RemkTimerTileService"
+            android:exported="true"
+            android:label="RE:MK 2. Timer"
+            android:description="@string/tile_description"
+            android:icon="@drawable/ic_tile_timer"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+                <action android:name="androidx.wear.tiles.action.BIND_UPDATE_REQUESTER" />
+            </intent-filter>
+        </service>
+
+        <!-- KACHEL 3: RE:MK MAKROS & WASSER -->
+        <service
+            android:name=".RemkNutritionTileService"
+            android:exported="true"
+            android:label="RE:MK 3. Makros"
+            android:description="@string/tile_description"
+            android:icon="@drawable/ic_tile_nutrition"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+                <action android:name="androidx.wear.tiles.action.BIND_UPDATE_REQUESTER" />
+            </intent-filter>
+        </service>
+
+        <!-- KACHEL 4: RE:MK CARDIO & SYNC -->
+        <service
+            android:name=".RemkCardioShopTileService"
+            android:exported="true"
+            android:label="RE:MK 4. Cardio"
+            android:description="@string/tile_description"
+            android:icon="@drawable/ic_tile_cardio"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+                <action android:name="androidx.wear.tiles.action.BIND_UPDATE_REQUESTER" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>
